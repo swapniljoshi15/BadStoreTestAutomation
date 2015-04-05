@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Failed suite [Suite1]" parallel="tests">
+  <test name="Test1_02(failed)" parallel="tests">
+    <classes>
+      <class name="badstore.TestClass2">
+        <methods>
+          <include name="sqlInjectionAttackTestOne"/>
+          <include name="xssAttackTestOne"/>
+          <include name="beforeSuite"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- badstore.TestClass2 -->
+      <class name="badstore.TestClass1">
+        <methods>
+          <include name="beforeTest"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- badstore.TestClass1 -->
+    </classes>
+  </test> <!-- Test1_02(failed) -->
+  <test name="Test1_01(failed)" parallel="tests">
+    <classes>
+      <class name="badstore.TestClass2">
+        <methods>
+          <include name="beforeSuite"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- badstore.TestClass2 -->
+      <class name="badstore.TestClass1">
+        <methods>
+          <include name="sqlInjectionAttackTestOne"/>
+          <include name="xssAttackTestOne"/>
+          <include name="beforeTest"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- badstore.TestClass1 -->
+    </classes>
+  </test> <!-- Test1_01(failed) -->
+</suite> <!-- Failed suite [Suite1] -->

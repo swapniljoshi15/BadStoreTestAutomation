@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="My Test Suite" duration-ms="0" started-at="2015-04-05T21:26:03Z" finished-at="2015-04-05T21:26:03Z">
+    <groups>
+    </groups>
+  </suite> <!-- My Test Suite -->
+  <suite name="Suite1" duration-ms="458131" started-at="2015-04-05T21:18:23Z" finished-at="2015-04-05T21:26:01Z">
+    <groups>
+    </groups>
+    <test name="Test1_02" duration-ms="456448" started-at="2015-04-05T21:18:23Z" finished-at="2015-04-05T21:26:00Z">
+      <class name="badstore.TestClass2">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:badstore.TestClass2@273e7444]" name="beforeTest" is-config="true" duration-ms="60656" started-at="2015-04-05T14:18:23Z" finished-at="2015-04-05T14:19:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="sqlInjectionAttackTestOne()[pri:0, instance:badstore.TestClass2@273e7444]" name="sqlInjectionAttackTestOne" duration-ms="156957" started-at="2015-04-05T14:19:24Z" finished-at="2015-04-05T14:22:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sqlInjectionAttackTestOne -->
+        <test-method status="PASS" signature="xssAttackTestOne()[pri:0, instance:badstore.TestClass2@273e7444]" name="xssAttackTestOne" duration-ms="238803" started-at="2015-04-05T14:22:01Z" finished-at="2015-04-05T14:26:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- xssAttackTestOne -->
+      </class> <!-- badstore.TestClass2 -->
+      <class name="badstore.TestClass1">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:badstore.TestClass1@f0da945]" name="beforeSuite" is-config="true" duration-ms="2085" started-at="2015-04-05T14:18:20Z" finished-at="2015-04-05T14:18:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:badstore.TestClass2@273e7444]" name="beforeSuite" is-config="true" duration-ms="1492" started-at="2015-04-05T14:18:22Z" finished-at="2015-04-05T14:18:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+      </class> <!-- badstore.TestClass1 -->
+    </test> <!-- Test1_02 -->
+    <test name="Test1_01" duration-ms="458131" started-at="2015-04-05T21:18:23Z" finished-at="2015-04-05T21:26:01Z">
+      <class name="badstore.TestClass1">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:badstore.TestClass1@f0da945]" name="beforeTest" is-config="true" duration-ms="70762" started-at="2015-04-05T14:18:23Z" finished-at="2015-04-05T14:19:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="sqlInjectionAttackTestOne()[pri:0, instance:badstore.TestClass1@f0da945]" name="sqlInjectionAttackTestOne" duration-ms="148291" started-at="2015-04-05T14:19:34Z" finished-at="2015-04-05T14:22:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sqlInjectionAttackTestOne -->
+        <test-method status="PASS" signature="xssAttackTestOne()[pri:0, instance:badstore.TestClass1@f0da945]" name="xssAttackTestOne" duration-ms="239025" started-at="2015-04-05T14:22:02Z" finished-at="2015-04-05T14:26:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- xssAttackTestOne -->
+      </class> <!-- badstore.TestClass1 -->
+    </test> <!-- Test1_01 -->
+  </suite> <!-- Suite1 -->
+</testng-results>
