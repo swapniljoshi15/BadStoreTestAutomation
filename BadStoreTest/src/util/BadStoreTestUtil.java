@@ -1,6 +1,11 @@
 package util;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -89,6 +94,88 @@ public class BadStoreTestUtil {
 				html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
 			}
 		}
+	}
+	
+	public static void disableInputDevice(String id) throws Exception{
+		try {
+			//String[] cmd = {"/home/swap/java_program/s.sh",id};
+			String[] cmd = {"/badstore/disable_input_device.sh",id};
+			Process pb = Runtime.getRuntime().exec(cmd);
+			String line;
+			BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
+			while ((line = input.readLine()) != null) {
+			    System.out.println(line);
+			}
+			input.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void enableInputDevice(String id) throws Exception{
+		try {
+			//String[] cmd = {"/home/swap/java_program/d.sh"};
+			String[] cmd = {"/badstore/enable_input_device.sh",id};
+			Process pb = Runtime.getRuntime().exec(cmd);
+			String line;
+			BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
+			while ((line = input.readLine()) != null) {
+			    System.out.println(line);
+			}
+			input.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void enableInputDevices() throws Exception{
+		String output = executeCommand("xinput list");
+		int[] device_ids = extractInputDeviceIds(output);
+		for(int id : device_ids){
+			enableInputDevice(Integer.toString(id));
+		}
+	}
+	
+	public static void disableInputDevices() throws Exception{
+		String output = executeCommand("xinput list");
+		int[] device_ids = extractInputDeviceIds(output);
+		for(int id : device_ids){
+			disableInputDevice(Integer.toString(id));
+		}
+	}
+	
+	private static String executeCommand(String command){
+		StringBuffer output = new StringBuffer();
+		Process process;
+		try{
+			process = Runtime.getRuntime().exec(command);
+			process.waitFor();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";			
+			while ((line = reader.readLine())!= null) {
+				output.append(line + "\n");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return output.toString();
+	}
+	
+	private static int[] extractInputDeviceIds(String output) throws Exception{
+		String[] lines = output.split("\n");
+		int[] ids = new int[lines.length-1];
+		Pattern pattern = Pattern.compile("(.*)id=(\\d+)(.*)");
+		for(int i=0; i<lines.length-1; i++){
+			if(lines[i] != null && !lines[i].isEmpty()){
+				Matcher matcher = pattern.matcher(lines[i]);
+				if(matcher.find() && matcher.group(2) != null && !matcher.group(2).isEmpty()){
+					ids[i] = Integer.parseInt(matcher.group(2));
+				}
+			}
+		}
+		return ids;
 	}
 	
 }

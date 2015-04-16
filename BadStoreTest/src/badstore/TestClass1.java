@@ -15,7 +15,9 @@ import org.testng.annotations.*;
 
 import util.BadStoreTestUtil;
 import static org.testng.Assert.*;
+import gui.StartScreen;
 
+import java.awt.Toolkit;
 import java.util.regex.Pattern;
 
 public class TestClass1{
@@ -36,17 +38,27 @@ public class TestClass1{
 	private String hackerTextColor = "red";
 	//waiting time information
 	private String waitForPageLoading = "100000"; //milliseconds
-	private int threadTimeForSleeping = 5000; //milliseconds
+	private int threadTimeForSleeping = 1000; //milliseconds
 	//test array to make flow parallel using locking mechanism
 	//skip 0 elemenet to keep it simple
 	//array initialize by 0. when particular number test completed, make [number]=>1
 	static byte[] trackTest = new byte[3];
+	//width and height
+	private double width;
+	private double height;
 
 	@BeforeSuite
 	public void beforeSuite() throws Exception{
+		System.out.println(System.getProperty("user.dir"));
+		//get screen width and height
+		java.awt.Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		width = screen.getWidth();
+		height = screen.getHeight();
+		System.out.println(width+" X "+height);
 		//adjust browser position
 		driver.manage().window().setPosition(new Point(0,0));
-		driver.manage().window().setSize(new Dimension(700,768));
+		driver.manage().window().setSize(new Dimension((int)width/2,(int)height));
+		//open selenium
 		selenium = new WebDriverBackedSelenium(driver, baseUrl);
 		selenium.open("/");
 		BadStoreTestUtil.zoomOutIn(driver, "zoomin", 5);
@@ -54,6 +66,8 @@ public class TestClass1{
 	
 	@BeforeTest
 	public void beforeTest() throws Exception{
+		//need to set position again for Linux Platform
+		driver.manage().window().setPosition(new Point(0,0));
 		//register user
 		BadStoreTestUtil.injectHtmlElement(driver, "body", "User creates his/her account on badstore");
 		userSignup(userEmail, userEmail, userPassword, userHighlightColor, userTextColor);
@@ -228,5 +242,13 @@ public class TestClass1{
 	
 	private void mockError()throws Exception{
 		selenium.click("link=mockerror");
+	}
+	
+	@AfterSuite
+	public void afterSuite() throws Exception{
+		//enable mouse
+		BadStoreTestUtil.enableInputDevices();
+		selenium.close();
+		
 	}
 }
