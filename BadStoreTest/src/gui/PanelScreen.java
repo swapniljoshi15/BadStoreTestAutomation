@@ -219,7 +219,15 @@ public class PanelScreen {
 			}
 		});
 	
-		
+		 frame.setExtendedState(frame.MAXIMIZED_BOTH);
+		/*JButton button_max=new JButton("Maximize");
+	    button_max.addActionListener(new ActionListener(){
+	       public void actionPerformed(ActionEvent ae)
+	       {
+	    	   frame.setExtendedState(frame.MAXIMIZED_BOTH);
+	       }
+	      });
+	    frame.add(button_max);*/
 		
 	}
 
@@ -236,6 +244,7 @@ public class PanelScreen {
 		// Create and set up the window.
 		frame = new JFrame("Barracuds WAF Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setUndecorated(true);
 
 		// Set up the content pane.
 		addComponentsToPane(frame.getContentPane());
@@ -246,7 +255,8 @@ public class PanelScreen {
 		frame.pack();
 		frame.setVisible(true);
 		frame.minimumSize();
-		frame.setMaximumSize(frame.getMaximumSize());
+		//frame.setMaximumSize(frame.getMaximumSize());
+		
 	}
 
 	public static void main(String[] args) {

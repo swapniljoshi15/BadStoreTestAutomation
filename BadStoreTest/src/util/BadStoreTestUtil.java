@@ -12,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import badstore.TestClass1;
+
 public class BadStoreTestUtil {
 
 	public static void highlightElementById(WebDriver driver, String elementID, String borderColor, String textColor) {
@@ -74,7 +76,7 @@ public class BadStoreTestUtil {
 		String pageSource = driver.getPageSource();
 		pageSource = pageSource.substring(pageSource.indexOf("<body")+1);
 		pageSource = pageSource.substring(pageSource.indexOf(">")+1,pageSource.lastIndexOf("</body>"));
-		String newElement = "<div id=\"commentText\" style=\"background-color:black; font-family: ‘Lucida Console’, Monaco, monospace; color:white; padding:5px; width:750px;\"><h3>"+message+"</h3></div>";
+		String newElement = "<div id=\"commentText\" style=\"background-color:black; font-family: ‘Lucida Console’, Monaco, monospace; color:white; padding:5px; width:" + ((TestClass1.width/2)-10) + ";\"><h3>"+message+"</h3></div>";
 		String modifiedHtml = pageSource+newElement;
 		modifiedHtml = modifiedHtml.replaceAll("\\s\\s*", " ");
 		modifiedHtml = modifiedHtml.replaceAll("&", "&amp;");
@@ -82,6 +84,22 @@ public class BadStoreTestUtil {
 		//modifiedHtml = modifiedHtml.replaceAll("'", "&#39;");
 		jsExecutor.executeScript("arguments[0].innerHTML='" + modifiedHtml + "'", element);
 	}
+	
+	public static void injectHtmlElementAttackBlock(WebDriver driver, String elementInfo, String message){
+		WebElement element = driver.findElement(By.tagName(elementInfo));
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		String pageSource = driver.getPageSource();
+		//pageSource = pageSource.substring(pageSource.indexOf("<div")+1);
+		//pageSource = pageSource.substring(pageSource.indexOf(">")+1,pageSource.lastIndexOf("</div>"));
+		String newElement = "<div id=\"commentText\" style=\"background-color:black; font-family: ‘Lucida Console’, Monaco, monospace; color:white; padding:5px; width:" + ((TestClass1.width/2)-10) + ";\"><h3>"+message+"</h3></div>";
+		String modifiedHtml = "<body>" + pageSource + newElement + "</body>";
+		modifiedHtml = modifiedHtml.replaceAll("\\s\\s*", " ");
+		modifiedHtml = modifiedHtml.replaceAll("&", "&amp;");
+		modifiedHtml = modifiedHtml.replaceAll("'", "\"");
+		//modifiedHtml = modifiedHtml.replaceAll("'", "&#39;");
+		jsExecutor.executeScript("arguments[0].innerHTML='" + modifiedHtml + "'", element);
+	}
+	
 	
 	public static void zoomOutIn(WebDriver driver, String zoomOption, int zoomLevel){
 		WebElement html = driver.findElement(By.tagName("html"));

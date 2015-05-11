@@ -3,6 +3,7 @@ package badstore;
 import com.thoughtworks.selenium.*;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class TestClass2{
 	
-	public String baseUrl = "http://127.0.0.1";
+	public String baseUrl = "http://99.99.101.30";
 	public WebDriver driver = new FirefoxDriver();
 	private Selenium selenium = null;
 	
@@ -61,7 +62,7 @@ public class TestClass2{
 	@BeforeTest
 	public void beforeTest() throws Exception{
 		//need to set position again for Linux Platform
-		driver.manage().window().setPosition(new Point((int)width/2,0));
+		//**driver.manage().window().setPosition(new Point((int)width/2,0));
 		//register user
 		BadStoreTestUtil.injectHtmlElement(driver, "body", "User creates his/her account on badstore");
 		userSignup(userEmail, userEmail, userPassword, userHighlightColor, userTextColor);
@@ -84,8 +85,16 @@ public class TestClass2{
 			userLogout(userHighlightColor, userTextColor);
 			//hacker login to users account through sql injection
 			BadStoreTestUtil.injectHtmlElement(driver, "body", "TEST 1 > STEP 3 ==> Hacker hacks user account with sql injection");
-			String sqlInjection = userEmail+"' /*";
+			String sqlInjection = userEmail+"' OR '1'='1";
 			userLogin(sqlInjection, "", hackerHighlightColor, hackerTextColor);
+			//to check whether WAF catch attack or not
+			if(driver.findElement(By.linkText("Home")) == null){
+				//WAF catch attack
+				BadStoreTestUtil.injectHtmlElementAttackBlock(driver, "div", "Attack Failed");
+				throw new Exception();
+			}else{
+				//WAF didn't catch attack
+			}
 			//open home page
 			BadStoreTestUtil.injectHtmlElement(driver, "body", "TEST 1 > STEP 4 ==> Hacker gets access to user account without password");
 			openHomepage(hackerHighlightColor, hackerTextColor);
@@ -113,6 +122,14 @@ public class TestClass2{
 			BadStoreTestUtil.injectHtmlElement(driver, "body", "TEST 2 > STEP 2 ==> Hacker inject xss with cookie stealing code");
 			String xssComment = "<h3 id=\"stolen_cookie\" style=\"color:red\"><script>document.write(document.cookie)</script></h3>";
 			userPostComment(hackerEmail, hackerEmail, xssComment, hackerHighlightColor, hackerTextColor);
+			//to check whether WAF catch attack or not
+			if(driver.findElement(By.linkText("Home")) == null){
+				//WAF catch attack
+				BadStoreTestUtil.injectHtmlElementAttackBlock(driver, "div", "Attack Failed");
+				throw new Exception();
+			}else{
+				//WAF didn't catch attack
+			}
 			//user login
 			BadStoreTestUtil.injectHtmlElement(driver, "body", "TEST 2 > STEP 3 ==> User login to his/her account");
 			userLogin(userEmail, userPassword, userHighlightColor, userTextColor);
