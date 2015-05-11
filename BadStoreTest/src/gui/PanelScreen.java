@@ -260,26 +260,31 @@ public class PanelScreen {
 	}
 
 	public static void main(String[] args) {
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-				
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							window = new PanelScreen();
-							graphicsDevice.setFullScreenWindow(window.frame);
-							window.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
+		try{
+			// disbale mouse right click
+			BadStoreTestUtil.disableMouseRightClick();
+			// creating and showing this application's GUI.
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					createAndShowGUI();
+					
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								window = new PanelScreen();
+								graphicsDevice.setFullScreenWindow(window.frame);
+								window.frame.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-				});
-				
-			}
-		});
+					});
+					
+				}
+			});
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 public static void startTest(List<XmlInclude> includeMethodsList){

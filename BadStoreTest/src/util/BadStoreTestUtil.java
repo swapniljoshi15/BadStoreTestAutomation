@@ -114,6 +114,23 @@ public class BadStoreTestUtil {
 		}
 	}
 	
+	public static void disableMouseRightClick() throws Exception{
+		try {
+			//String[] cmd = {"/home/swap/java_program/d.sh"};
+			String[] cmd = {"/badstore/disable_right_click.sh"};
+			Process pb = Runtime.getRuntime().exec(cmd);
+			String line;
+			BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
+			while ((line = input.readLine()) != null) {
+			    System.out.println(line);
+			}
+			input.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void disableInputDevice(String id) throws Exception{
 		try {
 			//String[] cmd = {"/home/swap/java_program/s.sh",id};
