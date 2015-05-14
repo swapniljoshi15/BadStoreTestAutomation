@@ -38,7 +38,7 @@ public class TestClass1{
 	private String hackerTextColor = "red";
 	//waiting time information
 	private String waitForPageLoading = "100000"; //milliseconds
-	private int threadTimeForSleeping = 1000; //milliseconds
+	private int threadTimeForSleeping = BadStoreTestUtil.threadTimeForSleeping; //milliseconds
 	//test array to make flow parallel using locking mechanism
 	//skip 0 elemenet to keep it simple
 	//array initialize by 0. when particular number test completed, make [number]=>1

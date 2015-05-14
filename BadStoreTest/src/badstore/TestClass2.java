@@ -36,7 +36,7 @@ public class TestClass2{
 	private String hackerTextColor = "red";
 	//waiting time information
 	private String waitForPageLoading = "100000"; //milliseconds
-	private int threadTimeForSleeping = 1000; //milliseconds
+	private int threadTimeForSleeping = BadStoreTestUtil.threadTimeForSleeping; //milliseconds
 	public static int threadParallelWait = 2000;
 	//width and height
 	private double width;

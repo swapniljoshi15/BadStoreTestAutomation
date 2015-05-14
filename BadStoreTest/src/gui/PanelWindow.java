@@ -1,21 +1,28 @@
 package gui;
 
+import java.awt.ComponentOrientation;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
@@ -25,15 +32,13 @@ import org.testng.xml.XmlTest;
 
 import util.BadStoreTestUtil;
 
-public class PanelScreen {
+public class PanelWindow extends JFrame {
 
-	private static PanelScreen window;
-	private static JFrame frame;
 	private static GraphicsDevice graphicsDevice;
 	
 	public static void addComponentsToPane(Container pane) {
 		GridBagConstraints c = new GridBagConstraints();
-		frame.setLayout(new GridBagLayout());
+		pane.setLayout(new GridBagLayout());
 		
 		JLabel demoLable = new JLabel();
 		demoLable.setText("");
@@ -44,7 +49,7 @@ public class PanelScreen {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -53,7 +58,7 @@ public class PanelScreen {
 		c.gridx = 1;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -62,7 +67,7 @@ public class PanelScreen {
 		c.gridx = 2;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -71,7 +76,7 @@ public class PanelScreen {
 		c.gridx = 3;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -80,7 +85,7 @@ public class PanelScreen {
 		c.gridx = 4;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -89,7 +94,7 @@ public class PanelScreen {
 		c.gridx = 5;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -98,7 +103,7 @@ public class PanelScreen {
 		c.gridx = 6;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		demoLable = new JLabel();
 		demoLable.setText("");
 		c.fill = GridBagConstraints.RELATIVE;
@@ -107,7 +112,7 @@ public class PanelScreen {
 		c.gridx = 7;
 		c.gridy = 0;
 		c.ipady = 10;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		
 		demoLable = new JLabel();
 		demoLable.setText("Barracuda WAF Demo Application");
@@ -119,12 +124,10 @@ public class PanelScreen {
 		c.gridy = 1;
 		c.ipady = 50;
 		c.gridwidth = 2;
-		frame.add(demoLable, c);
+		pane.add(demoLable, c);
 		
-		
-		//keep empty
-		demoLable = new JLabel();
-		demoLable.setText("");
+		//demo 1 start button 
+		JButton demoOneButton = new JButton("Demo 1");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.weightx = 0.0;
 		c.weighty = 0.0;
@@ -132,85 +135,18 @@ public class PanelScreen {
 		c.gridy = 2;
 		c.ipadx = 10;
 		c.ipady = 10;
-		frame.add(demoLable, c);
-		
-		//Select speed
-		demoLable = new JLabel();
-		demoLable.setText("Select demo speed");
-		demoLable.setFont(new Font("Arial", Font.PLAIN, 14));
-		c.fill = GridBagConstraints.RELATIVE;
-		c.weightx = 0.0;
-		c.weighty = 0.0;
-		c.gridx = 0;
-		c.gridy = 3;
-		c.ipadx = 10;
-		c.ipady = 10;
-		frame.add(demoLable, c);
-		
-		//demo 1 start button 
-		JButton demoOneButton = new JButton("SQL Injection Attack Demo");
-		c.fill = GridBagConstraints.RELATIVE;
-		c.weightx = 0.0;
-		c.weighty = 0.0;
-		c.gridx = 0;
-		c.gridy = 4;
-		c.ipadx = 10;
-		c.ipady = 10;
-		frame.add(demoOneButton, c);
+		pane.add(demoOneButton, c);
 		
 		//demo 2 start button
-		JButton demoTwoButton = new JButton("XSS Attack Demo");
+		JButton demoTwoButton = new JButton("Demo 2");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.weighty = 1.0;
 		c.weightx = 0.0;
 		c.gridx = 0;
-		c.gridy = 5;
+		c.gridy = 3;
 		c.ipadx = 10;
 		c.ipady = 10;
-		frame.add(demoTwoButton, c);
-		
-		
-		//description
-		demoLable = new JLabel();
-		demoLable.setText("<html> In these demos, we are going to show Barracuda WAF Demo Application functionality by simulating attack environment."
-				+ "Left browser instance shows attack while right browser instance shows how Barracuda Web Application Firewall blocks that attack.</html>");
-		demoLable.setFont(new Font("Arial", Font.PLAIN, 14));
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.0;
-		c.weighty = 0.2;
-		c.gridx = 1;
-		c.gridy = 2;
-		c.gridwidth = 6;
-		c.ipadx = 30;
-		c.ipady = 10;
-		frame.add(demoLable, c);
-		
-		//demo speed dropdown
-		final JComboBox demoSpeedComboBox = new JComboBox();
-		demoSpeedComboBox.addItem("Select Demo Speed");
-		demoSpeedComboBox.addItem("very slow");
-		demoSpeedComboBox.addItem("slow");
-		demoSpeedComboBox.addItem("medium");
-		demoSpeedComboBox.addItem("fast");
-		demoSpeedComboBox.addItem("very fast");
-		demoSpeedComboBox.addActionListener(new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		    	  if(demoSpeedComboBox.getSelectedIndex() > 0){
-		    		  BadStoreTestUtil.threadTimeForSleeping = (6-demoSpeedComboBox.getSelectedIndex()) * 1000;
-		    	  }else{
-		    		  BadStoreTestUtil.threadTimeForSleeping = 3000;
-		    	  }
-		      }
-	    });
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.0;
-		c.weighty = 0.1;
-		c.gridx = 2;
-		c.gridy = 3;
-		c.gridwidth = 2;
-		c.ipadx = 30;
-		c.ipady = 10;
-		frame.add(demoSpeedComboBox, c);
+		pane.add(demoTwoButton, c);
 		
 		JLabel demoOneDescriptionLable = new JLabel();
 		demoOneDescriptionLable.setText("<html>This is demo for sql injection attack. In sql injection attack, Hacker login into specific user's account without having user's credentials."
@@ -221,16 +157,15 @@ public class PanelScreen {
 				+ "<br/>4.User logout"
 				+ "<br/>5.Hacker hacks user account with sql injection and user's email address"
 				+ "</html>");
-		demoOneDescriptionLable.setFont(new Font("Arial", Font.PLAIN, 14));
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 		c.gridx = 2;
-		c.gridy = 4;
+		c.gridy = 2;
 		c.gridwidth = 4;
 		c.ipadx = 30;
 		c.ipady = 10;
-		frame.add(demoOneDescriptionLable, c);
+		pane.add(demoOneDescriptionLable, c);
 		
 		
 		JLabel demoTwoDescriptionLable = new JLabel();
@@ -244,15 +179,14 @@ public class PanelScreen {
 				+ "<br/>6.User post comment and redirectd to comments page. At this point, hacker's injected script steals user's cookie"
 				+ "<br/>7.Hacker creates fake cookie same as user cookie and  Hacker visits website and hacker gets user account access"
 				+ "</html>");
-		demoTwoDescriptionLable.setFont(new Font("Arial", Font.PLAIN, 14));
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weighty = 1.0;
 		c.gridx = 2;
-		c.gridy = 5;
+		c.gridy = 3;
 		c.gridwidth = 4;
 		c.ipadx = 30;
 		c.ipady = 10;
-		frame.add(demoTwoDescriptionLable, c);
+		pane.add(demoTwoDescriptionLable, c);
 		
 		
 		//button action 
@@ -291,15 +225,7 @@ public class PanelScreen {
 			}
 		});
 	
-		 frame.setExtendedState(frame.MAXIMIZED_BOTH);
-		/*JButton button_max=new JButton("Maximize");
-	    button_max.addActionListener(new ActionListener(){
-	       public void actionPerformed(ActionEvent ae)
-	       {
-	    	   frame.setExtendedState(frame.MAXIMIZED_BOTH);
-	       }
-	      });
-	    frame.add(button_max);*/
+		
 		
 	}
 
@@ -314,9 +240,8 @@ public class PanelScreen {
 		graphicsDevice = devices[0];
 		
 		// Create and set up the window.
-		frame = new JFrame("Barracuds WAF Demo");
+		JFrame frame = new JFrame("Barracuds WAF Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setUndecorated(true);
 
 		// Set up the content pane.
 		addComponentsToPane(frame.getContentPane());
@@ -327,36 +252,17 @@ public class PanelScreen {
 		frame.pack();
 		frame.setVisible(true);
 		frame.minimumSize();
-		//frame.setMaximumSize(frame.getMaximumSize());
-		
+		frame.setMaximumSize(frame.getMaximumSize());
 	}
 
 	public static void main(String[] args) {
-		try{
-			// disbale mouse right click
-			BadStoreTestUtil.disableMouseRightClick();
-			// creating and showing this application's GUI.
-			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					createAndShowGUI();
-					
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								window = new PanelScreen();
-								graphicsDevice.setFullScreenWindow(window.frame);
-								window.frame.setVisible(true);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-					
-				}
-			});
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		// Schedule a job for the event-dispatching thread:
+		// creating and showing this application's GUI.
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
 	}
 	
 public static void startTest(List<XmlInclude> includeMethodsList){

@@ -15,6 +15,8 @@ import org.openqa.selenium.WebElement;
 import badstore.TestClass1;
 
 public class BadStoreTestUtil {
+	
+	public static int threadTimeForSleeping = 1000;
 
 	public static void highlightElementById(WebDriver driver, String elementID, String borderColor, String textColor) {
 		WebElement element = driver.findElement(By.id(elementID));
